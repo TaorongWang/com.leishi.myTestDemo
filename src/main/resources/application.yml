@@ -19,8 +19,10 @@ spring:
     min-evictable-idle-time-millis: 1800000
 
 mybatis:
-  mapper-locations: classpath:mapping/*.xml   #mapper.xml文件
-  type-aliases-package: cn.joinhealth.model   #model层位置
+  #mapper.xml文件
+  mapper-locations: classpath:mapping/*.xml
+  #model层位置
+  type-aliases-package: cn.joinhealth.model
 #端口
 server:
   port: 9091

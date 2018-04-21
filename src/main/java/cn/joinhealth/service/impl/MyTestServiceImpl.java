@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,9 +28,7 @@ public class MyTestServiceImpl implements MyTestService {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("name", reqJson.getString("name"));
         List<AccountApplicationUserModel> userModelList = myTestMapper.selectList(map);
-        System.out.println(JSONObject.toJSON(userModelList));
         respJson.put("data", userModelList);
-        System.out.println(respJson);
         return respJson;
     }
 }

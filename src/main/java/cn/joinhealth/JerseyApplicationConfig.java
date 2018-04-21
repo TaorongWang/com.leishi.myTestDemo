@@ -13,6 +13,6 @@ public class JerseyApplicationConfig extends ResourceConfig {
     // 初始化
     public JerseyApplicationConfig() {
         property(ServerProperties.BV_SEND_ERROR_IN_RESPONSE, true);
-        packages("cn.joinhealth");
+        packages("cn.joinhealth.filter");
     }
 }

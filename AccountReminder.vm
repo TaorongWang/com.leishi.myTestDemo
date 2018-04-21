@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<table style="position: relative;
+              font-size: 16px;
+              -webkit-box-shadow: 0px 2px 6px rgba(153, 153, 153, 0.5);
+              -moz-box-shadow: 0px 2px 6px rgba(153, 153, 153, 0.5);
+              box-shadow: 0px 2px 6px rgba(153, 153, 153, 0.5);
+              border: 1px solid #BDBDBD;
+              padding: 15px 40px 10px 40px;">
+    <tr>
+        <td>
+            <h3 style="font-size: 18px;color: rgb(110, 188, 255);letter-spacing: 0.5px">账号到期通知</h3>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p style="margin: 0px 0px;font-size: 14px;color: #212121;letter-spacing: 0.5px">尊敬的${userName}:</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p style="margin: 0px 0px;font-size: 14px;color: #212121;letter-spacing: 0.5px">您好！</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p style="margin: 0px 0px;font-size: 14px;color: #212121;letter-spacing: 0.5px">您的开发者账号${email}将于<span style="color: rgb(110, 188, 255);font-weight: bold; ">${expireTime}</span>到期，届时系统将不再发送邮件提醒。</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p style="margin: 0px 0px;font-size: 14px;color: #212121;letter-spacing: 0.5px">如需继续使用该账号，可在开发者平台上提交工单或联系SecurityX Support Team（${supportTeam}）。</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p style="margin: 12px 0px 5px 0px;color: #9E9E9E;letter-spacing: 0.5px;font-size: 12px">
+                如果这不是您的邮件请忽略，抱歉打扰。
+            </p>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <p style="margin: 5px 0px 5px 0px;color: #9E9E9E;letter-spacing: 0.5px;font-size: 12px">
+                此邮件由SecurityX开发者平台发出，系统不接受回信，请勿直接回复。
+                <br>如有任何疑问请联系我们<span style="color: #212121;margin-left: 3px;letter-spacing: 0.5px">service@zenzet.com</span>
+            </p>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <hr>
+        </td>
+    </tr>
+
+    <tr>
+        <td align="left">
+            <a href="https://developer.zenzet.com" target="_blank" style="text-decoration: none; color: #000;">
+                <div style="margin-bottom: 10px;">
+                    <img src="https://developer.zenzet.com/logo.png" width="40" height="40"
+                         style="display: inline-block;vertical-align: middle;">
+                    <div style="display: inline-block;vertical-align: middle;">
+        <span style="position:relative; top:4px; font-weight: bold;font-size: 16px; vertical-align:baseline;zoom:1 ">
+          SecurityX
+        </span>
+                        <span style="font-weight: bold; font-size: 16px; vertical-align:baseline; position: relative; right: 3px; top: 4px;color: #212121">
+          开发者平台
+        </span>
+                        <span style="display: block; color: #212121; font-size: 12px; position: relative; bottom: 5px;letter-spacing: 0.5px">
+          https://developer.zenzet.com
+        </span>
+                    </div>
+                </div>
+            </a>
+        </td>
+    </tr>
+
+</table>
+</body>
+</html>

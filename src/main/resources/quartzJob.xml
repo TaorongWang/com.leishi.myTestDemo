@@ -5,6 +5,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+
     <!-- 定义目标bean和bean中的方法 -->
     <!--任务job -->
     <bean id="quartzJob" class="cn.joinhealth.quartz.QuartzJob">
@@ -23,8 +24,8 @@
     <!--定义触发时间-->
     <bean id="taskCronTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="quartzJobMethod"></property>
-        <!-- 每天上午10:00 触发   -->
-        <property name="cronExpression" value="0 0/2 * * * ?"></property>
+        <!-- 2分钟触发一次 触发   -->
+        <property name="cronExpression" value="0 0/60 * * * ?"></property>
     </bean>
 
     <!-- 触发器配置-->

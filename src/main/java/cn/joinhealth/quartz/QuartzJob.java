@@ -1,15 +1,15 @@
 package cn.joinhealth.quartz;
 
+import org.apache.velocity.app.VelocityEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.velocity.VelocityEngineUtils;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Created by shilei on 2018/4/19.
@@ -21,11 +21,13 @@ public class QuartzJob {
     private static Logger log = LoggerFactory.getLogger(QuartzJob.class);
     private static ResourceBundle RES = ResourceBundle.getBundle("config");
 
-    public void sendEmailTask() {
-        if ("false".equals(RES.getString("debug"))){
-            System.out.println("JOB STOP---------------");
+    public void sendEmailTask() throws Exception {
+
+        if ("false".equals(RES.getString("debug"))) {
+            log.info("Job--------not open-------------");
             return;
         }
+
         log.info("Job--------start-------------");
         //0.1 确定连接位置
         Properties props = new Properties();
@@ -44,20 +46,18 @@ public class QuartzJob {
                 }
             };
 
-            //1 获得连接
+            // 1.获得连接
             /**
              * props：包含配置信息的对象，Properties类型
              *         配置邮箱服务器地址、配置是否进行权限验证(帐号密码验证)等
-             *
              * authenticator：确定权限(帐号和密码)
-             *
              * 所以就要在上面构建这两个对象。
              */
             Session session = Session.getDefaultInstance(props, authenticator);
 
-            //2 创建消息
+            // 2.创建消息
             Message message = new MimeMessage(session);
-            // 2.1 发件人        xxx@163.com 我们自己的邮箱地址，就是名称
+            // 2.1发件人        xxx@163.com 我们自己的邮箱地址，就是名称
             message.setFrom(new InternetAddress("shilei2017ahtcm@163.com"));
             /**
              * 2.2 收件人
@@ -77,18 +77,19 @@ public class QuartzJob {
             addressesList.add(new InternetAddress("lshi01@joinhealth.cn"));
             Address[] address = new Address[addressesList.size()];
             message.setRecipients(Message.RecipientType.TO, addressesList.toArray(address));
-            // 2.3 主题（标题）
-            message.setSubject("邀请函");
-            // 2.4 正文
-            String str = "李四： <br/>" +
-                    "您好，您在本论坛注册用户，点击下面url进行激活<br/>" +
-                    "http://ww......<br/>" +
-                    "如果不能点击，请复制直接激活<br/>" +
-                    "如果不是本人，请删除邮件";
-            //设置编码，防止发送的内容中文乱码。
+            // 2.3主题（标题）
+            message.setSubject("服务到期通知");
+            // 2.4正文
+            VelocityEngine velocityEngine = new VelocityEngine();
+            Map<String, Object> model = new HashMap<String, Object>();
+            model.put("userName", "shilei");
+            model.put("email", "shilei2017ahtcm@163.com");
+            model.put("expireTime", "2018-04-21 00:00:00");
+            model.put("supportTeam", "shilei2017ahtcm@163.com");
+            String str = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "AccountReminder.vm", "UTF-8", model);
             message.setContent(str, "text/html;charset=UTF-8");
 
-            //3发送消息
+            // 3.发送消息
             Transport.send(message);
             log.info("Job--------end-------------");
         } catch (Exception e) {
