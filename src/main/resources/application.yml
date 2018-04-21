@@ -1,0 +1,33 @@
+#全局配置
+spring:
+  datasource:
+  ###########开发环境用#############
+    url: jdbc:mysql://192.168.3.80:3306/ssx-test?useUnicode=true&characterEncoding=UTF-8
+    username: sf
+    password: sf123
+    driver-class-name: com.mysql.jdbc.Driver
+    max-idle: 10
+    max-wait: 10000
+    min-idle: 5
+    initial-size: 5
+    test-on-borrow: true
+    #获取连接时候验证
+    test-while-idle: true
+    time-between-eviction-runs-millis: 300000
+    validation-query: SELECT 1 FROM DUAL
+    #连接池空闲连接的有效时间 ，设置30分钟
+    min-evictable-idle-time-millis: 1800000
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml   #mapper.xml文件
+  type-aliases-package: cn.joinhealth.model   #model层位置
+#端口
+server:
+  port: 9091
+
+#security日志
+logging:
+  level:
+    org:
+      springframework:
+        security: INFO

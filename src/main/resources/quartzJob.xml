@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 定义目标bean和bean中的方法 -->
+    <!--任务job -->
+    <bean id="quartzJob" class="cn.joinhealth.quartz.QuartzJob">
+    </bean>
+    <bean id="quartzJobMethod" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <!-- 要执行的类名称 -->
+        <property name="targetObject">
+            <ref bean="quartzJob"/>
+        </property>
+        <!-- 要执行的方法名称 -->
+        <property name="targetMethod">
+            <value>sendEmailTask</value>
+        </property>
+    </bean>
+
+    <!--定义触发时间-->
+    <bean id="taskCronTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="quartzJobMethod"></property>
+        <!-- 每天上午10:00 触发   -->
+        <property name="cronExpression" value="0 0/2 * * * ?"></property>
+    </bean>
+
+    <!-- 触发器配置-->
+    <bean id="SpringJobSchedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="taskCronTriggerBean"/>
+            </list>
+        </property>
+    </bean>
+</beans>
